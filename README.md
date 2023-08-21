@@ -1,2 +1,3 @@
 # My dotfiles for:
-* VSCode
+* vscode
+* vim
