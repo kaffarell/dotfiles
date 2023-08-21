@@ -1,0 +1,107 @@
+{
+    "workbench.colorTheme": "GitHub Dark Default",
+    "workbench.iconTheme": "vscode-icons",
+    "editor.fontFamily": "SF Mono",
+    //"editor.fontFamily": "SF Mono Light",
+    //"editor.fontFamily": "Courier New",
+    "editor.lineHeight": 0,
+    //"editor.fontLigatures": true,
+    "editor.fontSize": 17,
+    "files.exclude": {
+        "**/.git": false
+    },
+    "rust-analyzer.procMacro.enable": false,
+    "git.mergeEditor": true,
+    "[go]": {
+        "editor.formatOnSave": false,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true,
+        },
+    },
+    "editor.formatOnSave": false,
+    "vsicons.presets.foldersAllDefaultIcon": true,
+    "editor.inlineSuggest.enabled": true,
+    "window.commandCenter": true,
+    "editor.lineNumbers": "relative",
+    "editor.minimap.enabled": false,
+    "vim.leader": "<Space>",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        // NAVIGATION
+        // switch b/w buffers
+        { "before": ["<S-h>"], "commands": [":bprevious"] },
+        { "before": ["<S-l>"], "commands": [":bnext"] },
+
+        // splits
+        { "before": ["leader", "v"], "commands": [":vsplit"] },
+        { "before": ["leader", "s"], "commands": [":split"] },
+
+        // panes
+        {
+            "before": ["leader", "h"],
+            "commands": ["workbench.action.focusLeftGroup"]
+        },
+        {
+            "before": ["leader", "j"],
+            "commands": ["workbench.action.focusBelowGroup"]
+        },
+        {
+            "before": ["leader", "k"],
+            "commands": ["workbench.action.focusAboveGroup"]
+        },
+        {
+            "before": ["leader", "l"],
+            "commands": ["workbench.action.focusRightGroup"]
+        },
+
+        // FILE TREE
+        {
+            "before": ["leader", "n", "e"],
+            "commands": ["workbench.explorer.fileView.focus"]
+        },
+
+        // NICE TO HAVE
+        { "before": ["leader", "w"], "commands": ["workbench.action.files.save"] },
+        { "before": ["leader", "f"], "commands": ["workbench.action.quickOpen"] },
+        { "before": ["leader", "p"], "commands": ["editor.action.formatDocument"] },
+        {
+            "before": ["g", "h"],
+            "commands": ["editor.action.showDefinitionPreviewHover"]
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        // Stay in visual mode while indenting
+        { "before": ["<"], "commands": ["editor.action.outdentLines"] },
+        { "before": [">"], "commands": ["editor.action.indentLines"] },
+        { "before": ["="], "commands": ["editor.action.formatSelection"] },
+        // Move selected lines while staying in visual mode
+        { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
+        { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
+        // toggle comment selection
+        { "before": ["leader", "c"], "commands": ["editor.action.commentLine"] }
+    ],
+    "extensions.ignoreRecommendations": true,
+    "[javascript]": {
+       "editor.renderWhitespace": "boundary",
+       "editor.detectIndentation": false,
+       "editor.insertSpaces": true,
+       "editor.tabSize": 8,
+       "editor.indentSize": 4
+   },
+   "[perl]": {
+       "editor.renderWhitespace": "boundary",
+       "editor.detectIndentation": false,
+       "editor.insertSpaces": true,
+       "editor.tabSize": 8,
+       "editor.indentSize": 4
+    },
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "/home/ggoller/.vimrc",
+    "gitlens.autolinks": [
+        {
+            "prefix": "#",
+            "url": "https://bugzilla.proxmox.com/show_bug.cgi?id=<num>"
+        }
+    ],
+    "editor.stickyScroll.enabled": true,
+    "window.menuBarVisibility": "toggle",
+}
