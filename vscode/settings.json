@@ -66,6 +66,10 @@
         {
             "before": ["g", "h"],
             "commands": ["editor.action.showDefinitionPreviewHover"]
+        },
+        {
+          "before": ["g", "a"],
+          "commands": ["editor.action.goToReferences"]
         }
     ],
     "vim.visualModeKeyBindings": [
