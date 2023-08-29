@@ -36,34 +36,35 @@ require("lazy").setup({
           indent = { enable = true },  
         })
     end
- },
- {
-  "folke/tokyonight.nvim",
-  lazy = false,
-  priority = 1000,
-  opts = {},
- },
- {
-  'VonHeikemen/lsp-zero.nvim',
-  branch = 'v2.x',
-  dependencies = {
-    -- LSP Support
-    {'neovim/nvim-lspconfig'},             -- Required
-    {'williamboman/mason.nvim'},           -- Optional
-    {'williamboman/mason-lspconfig.nvim'}, -- Optional
+  },
+  "nvim-treesitter/nvim-treesitter-refactor",
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v2.x',
+    dependencies = {
+     -- LSP Support
+     {'neovim/nvim-lspconfig'},             -- Required
+     {'williamboman/mason.nvim'},           -- Optional
+     {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-    -- Autocompletion
-    {'hrsh7th/nvim-cmp'},     -- Required
-    {'hrsh7th/cmp-nvim-lsp'}, -- Required
-    {'L3MON4D3/LuaSnip'},     -- Required
-  }
- },
- {
-  'nvim-telescope/telescope.nvim', branch = '0.1.x',
-   dependencies = { 'nvim-lua/plenary.nvim' }
- },
- 'ThePrimeagen/harpoon',
- 'nvim-treesitter/nvim-treesitter-context'
+     -- Autocompletion
+     {'hrsh7th/nvim-cmp'},     -- Required
+     {'hrsh7th/cmp-nvim-lsp'}, -- Required
+     {'L3MON4D3/LuaSnip'},     -- Required
+   }
+  },
+  {
+   'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  'ThePrimeagen/harpoon',
+  'nvim-treesitter/nvim-treesitter-context'
 })
 
 local lsp = require('lsp-zero').preset({})
@@ -130,6 +131,22 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+require'nvim-treesitter.configs'.setup {
+  refactor = {
+    highlight_definitions = {
+      enable = true,
+      -- Set to false if you have an `updatetime` of ~100.
+      clear_on_cursor_move = true,
+    },
+    smart_rename = {
+      enable = true,
+      -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
+      keymaps = {
+        smart_rename = "grr",
+      },
+    },
+  },
+}
 
 vim.cmd[[colorscheme tokyonight]]
 
@@ -183,5 +200,4 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>");
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
-
 
