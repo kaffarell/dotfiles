@@ -67,6 +67,7 @@ require("lazy").setup({
   'nvim-treesitter/nvim-treesitter-context',
   --'f-person/git-blame.nvim',
   'tpope/vim-fugitive',
+  'tanvirtin/vgit.nvim',
 })
 
 local lsp = require('lsp-zero').preset({})
@@ -163,6 +164,7 @@ vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
 vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 
+require('vgit').setup()
 
 -- other random remaps
 vim.g.mapleader = " "
