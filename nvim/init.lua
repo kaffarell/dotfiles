@@ -37,7 +37,6 @@ require("lazy").setup({
         })
     end
   },
-  "nvim-treesitter/nvim-treesitter-refactor",
   {
     "folke/tokyonight.nvim",
     lazy = false,
@@ -68,6 +67,8 @@ require("lazy").setup({
   --'f-person/git-blame.nvim',
   'tpope/vim-fugitive',
   'tanvirtin/vgit.nvim',
+  'RRethy/vim-illuminate',
+  'mbbill/undotree',
 })
 
 local lsp = require('lsp-zero').preset({})
@@ -134,24 +135,11 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
-require'nvim-treesitter.configs'.setup {
-  refactor = {
-    highlight_definitions = {
-      enable = true,
-      -- Set to false if you have an `updatetime` of ~100.
-      clear_on_cursor_move = true,
-    },
-    smart_rename = {
-      enable = true,
-      -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
-      keymaps = {
-        smart_rename = "grr",
-      },
-    },
-  },
-}
 
 vim.cmd[[colorscheme tokyonight]]
+
+-- Undotree
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
