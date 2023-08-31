@@ -97,6 +97,8 @@ lsp.ensure_installed({
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
+-- to make PLS work
+require'lspconfig'.perlpls.setup{}
 
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
