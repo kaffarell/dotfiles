@@ -20,8 +20,10 @@ vim.cmd([[
 -- Make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.mapleader = " "
 
--- add "jk" as a shortcut to get to the normal mode
-vim.api.nvim_set_keymap("i", "jk", "<esc>", {noremap=true, silent=true})
+-- add "jk" and Control-C as a shortcut to get to the normal mode
+vim.keymap.set("i", "<C-c>", "<Esc>")
+vim.keymap.set("i", "jk", "<Esc>")
+
 
 require("lazy").setup({
   "folke/which-key.nvim",
