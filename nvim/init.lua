@@ -10,6 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
 vim.cmd([[
  set runtimepath^=~/.vim runtimepath+=~/.vim/after
  let &packpath = &runtimepath
@@ -17,7 +18,10 @@ vim.cmd([[
 ]])
 
 -- Make sure to set `mapleader` before lazy so your mappings are correct
-vim.g.mapleader = " " 
+vim.g.mapleader = " "
+
+-- add "jk" as a shortcut to get to the normal mode
+vim.api.nvim_set_keymap("i", "jk", "<esc>", {noremap=true, silent=true})
 
 require("lazy").setup({
   "folke/which-key.nvim",
