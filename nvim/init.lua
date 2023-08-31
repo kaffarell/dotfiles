@@ -11,11 +11,20 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
-vim.cmd([[
- set runtimepath^=~/.vim runtimepath+=~/.vim/after
- let &packpath = &runtimepath
- source ~/.vimrc
-]])
+vim.opt.nu = true
+vim.opt.relativenumber = true
+vim.opt.tabstop = 8
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+vim.opt.termguicolors = true
+
+vim.keymap.set("v", "p", "pgvy")
 
 -- Make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.mapleader = " "
@@ -92,9 +101,9 @@ lsp.nvim_workspace()
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
 local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+  ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
+  ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+  ['<CR>'] = cmp.mapping.confirm({ select = true }),
   ["<C-Space>"] = cmp.mapping.complete(),
 })
 
@@ -121,7 +130,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-  vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+  vim.keymap.set("n", "ge", function() vim.diagnostic.open_float() end, opts)
   vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
   vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
   vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
