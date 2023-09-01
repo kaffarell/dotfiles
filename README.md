@@ -2,3 +2,4 @@
 * vscode
 * vim
 * nvim
+* i3
