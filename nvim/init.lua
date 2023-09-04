@@ -113,7 +113,12 @@ cmp_mappings['<Tab>'] = nil
 cmp_mappings['<S-Tab>'] = nil
 
 lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
+  mapping = cmp_mappings,
+  snippet = {
+    expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
 })
 
 lsp.set_preferences({
