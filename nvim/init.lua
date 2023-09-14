@@ -83,6 +83,7 @@ require("lazy").setup({
     'tanvirtin/vgit.nvim',
     'RRethy/vim-illuminate',
     'mbbill/undotree',
+    'folke/trouble.nvim',
 })
 
 local lsp = require('lsp-zero').preset({})
@@ -95,6 +96,21 @@ lsp.ensure_installed({
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
+
+require('trouble').setup {
+    icons = false,
+    fold_open = "v",
+    fold_closed = ">",
+    indent_lines = false,
+    signs = {
+        error = "error",
+        warning = "warn",
+        hint = "hint",
+        information = "info"
+    },
+    use_diagnostic_signs = false
+}
+
 
 -- to make PLS work
 require'lspconfig'.perlpls.setup{}
@@ -167,7 +183,7 @@ vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[colorscheme tokyonight-night]]
 
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -184,6 +200,10 @@ vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 
 require('vgit').setup()
+
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
 
 -- other random remaps
 vim.g.mapleader = " "
@@ -225,4 +245,6 @@ vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/the
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 vim.keymap.set("n", "<leader>gb", ":G blame<CR>");
+
+
 
