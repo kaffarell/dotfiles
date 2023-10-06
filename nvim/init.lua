@@ -84,6 +84,16 @@ require("lazy").setup({
     'RRethy/vim-illuminate',
     'mbbill/undotree',
     'folke/trouble.nvim',
+    {
+      "folke/todo-comments.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        signs = true,
+      }
+    },
 })
 
 local lsp = require('lsp-zero').preset({})
@@ -206,9 +216,16 @@ vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
 vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 
+vim.o.updatetime = 900
+vim.o.incsearch = false
+vim.wo.signcolumn = 'yes'
+
 require('vgit').setup()
 
 vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>",
   {silent = true, noremap = true}
 )
 
@@ -232,7 +249,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
--- copy to clipboard
+-- copy to cleapboard
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
