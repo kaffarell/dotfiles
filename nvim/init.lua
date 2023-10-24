@@ -58,6 +58,7 @@ require("lazy").setup({
         priority = 1000,
         opts = {},
     },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v2.x',
@@ -83,6 +84,7 @@ require("lazy").setup({
     'tanvirtin/vgit.nvim',
     'RRethy/vim-illuminate',
     'mbbill/undotree',
+    'nvim-tree/nvim-web-devicons',
     'folke/trouble.nvim',
     {
       "folke/todo-comments.nvim",
@@ -109,17 +111,7 @@ lsp.nvim_workspace()
 
 
 require('trouble').setup {
-    icons = false,
-    fold_open = "v",
-    fold_closed = ">",
-    indent_lines = false,
-    signs = {
-        error = "error",
-        warning = "warn",
-        hint = "hint",
-        information = "info"
-    },
-    use_diagnostic_signs = false
+    icons = true,
 }
 
 
@@ -145,12 +137,6 @@ lsp.setup_nvim_cmp({
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
-    sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
-    }
 })
 
 lsp.on_attach(function(client, bufnr)
@@ -193,8 +179,12 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+require("catppuccin").setup({
+    flavour = "macchiato",
+    term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
+})
 
-vim.cmd[[colorscheme tokyonight-night]]
+vim.cmd[[colorscheme catppuccin]]
 
 -- Undotree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -222,7 +212,10 @@ vim.wo.signcolumn = 'yes'
 
 require('vgit').setup()
 
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
   {silent = true, noremap = true}
 )
 vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>",

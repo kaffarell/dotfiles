@@ -342,7 +342,6 @@ program = "/usr/bin/zsh"
 [window]
 decorations = "full"
 dynamic_padding = false
-opacity = 1.0
 startup_mode = "Windowed"
 
 [window.dimensions]
@@ -352,3 +351,40 @@ lines = 85
 [window.padding]
 x = 0
 y = 0
+
+
+
+[colors.primary]
+background= '0x1a1b26'
+foreground= '0xc0caf5'
+
+[colors.normal]
+black=   '0x15161e'
+red=     '0xf7768e'
+green=   '0x9ece6a'
+yellow=  '0xe0af68'
+blue=    '0x7aa2f7'
+magenta= '0xbb9af7'
+cyan=    '0x7dcfff'
+white=   '0xa9b1d6'
+
+# Bright colors
+[colors.bright]
+black=   '0x414868'
+red=     '0xf7768e'
+green=   '0x9ece6a'
+yellow=  '0xe0af68'
+blue=    '0x7aa2f7'
+magenta= '0xbb9af7'
+cyan=    '0x7dcfff'
+white=   '0xc0caf5'
+
+[[colors.indexed_colors]]
+color = "0xff9e64"
+index = 16
+
+[[colors.indexed_colors]]
+color = "0xdb4b4b"
+index = 17
+
+
