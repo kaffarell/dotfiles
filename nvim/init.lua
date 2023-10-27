@@ -29,10 +29,8 @@ vim.keymap.set("v", "p", "pgvy")
 -- Make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.mapleader = " "
 
--- add "jk" and Control-C as a shortcut to get to the normal mode
+-- add Control-C as a shortcut to get to the normal mode (alternative to caps-lock)
 vim.keymap.set("i", "<C-c>", "<Esc>")
-vim.keymap.set("i", "jk", "<Esc>")
-
 
 require("lazy").setup({
     "folke/which-key.nvim",
@@ -90,7 +88,7 @@ require("lazy").setup({
       "folke/todo-comments.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
       opts = {
-        -- your configuration comes here
+        -- your confiuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
         signs = true,
@@ -151,7 +149,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     -- show code actions
     vim.keymap.set("n", "gc", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
+    vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
@@ -229,7 +227,6 @@ vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("n", "J", "mzJ`z")
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz")
 -- vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
