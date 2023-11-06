@@ -326,7 +326,7 @@ key = "F"
 mods = "Command"
 
 [mouse]
-hide_when_typing = true
+hide_when_typing = false
 
 [[mouse.bindings]]
 action = "PasteSelection"
@@ -352,39 +352,110 @@ lines = 85
 x = 0
 y = 0
 
+[env]
+TERM = "xterm-256color"
 
 
+# catpuccin
 [colors.primary]
-background= '0x1a1b26'
-foreground= '0xc0caf5'
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+dim_foreground = "#CDD6F4"
+bright_foreground = "#CDD6F4"
+
+[colors.cursor]
+text = "#1E1E2E"
+cursor = "#F5E0DC"
+
+[colors.vi_mode_cursor]
+text = "#1E1E2E"
+cursor = "#B4BEFE"
+
+[colors.search.matches]
+foreground = "#1E1E2E"
+background = "#A6ADC8"
+
+[colors.search.focused_match]
+foreground = "#1E1E2E"
+background = "#A6E3A1"
+
+[colors.footer_bar]
+foreground = "#1E1E2E"
+background = "#A6ADC8"
+
+[colors.hints.start]
+foreground = "#1E1E2E"
+background = "#F9E2AF"
+
+[colors.hints.end]
+foreground = "#1E1E2E"
+background = "#A6ADC8"
+
+[colors.selection]
+text = "#1E1E2E"
+background = "#F5E0DC"
 
 [colors.normal]
-black=   '0x15161e'
-red=     '0xf7768e'
-green=   '0x9ece6a'
-yellow=  '0xe0af68'
-blue=    '0x7aa2f7'
-magenta= '0xbb9af7'
-cyan=    '0x7dcfff'
-white=   '0xa9b1d6'
+black = "#45475A"
+red = "#F38BA8"
+green = "#A6E3A1"
+yellow = "#F9E2AF"
+blue = "#89B4FA"
+magenta = "#F5C2E7"
+cyan = "#94E2D5"
+white = "#BAC2DE"
 
-# Bright colors
 [colors.bright]
-black=   '0x414868'
-red=     '0xf7768e'
-green=   '0x9ece6a'
-yellow=  '0xe0af68'
-blue=    '0x7aa2f7'
-magenta= '0xbb9af7'
-cyan=    '0x7dcfff'
-white=   '0xc0caf5'
+black = "#585B70"
+red = "#F38BA8"
+green = "#A6E3A1"
+yellow = "#F9E2AF"
+blue = "#89B4FA"
+magenta = "#F5C2E7"
+cyan = "#94E2D5"
+white = "#A6ADC8"
+
+[colors.dim]
+black = "#45475A"
+red = "#F38BA8"
+green = "#A6E3A1"
+yellow = "#F9E2AF"
+blue = "#89B4FA"
+magenta = "#F5C2E7"
+cyan = "#94E2D5"
+white = "#BAC2DE"
 
 [[colors.indexed_colors]]
-color = "0xff9e64"
 index = 16
+color = "#FAB387"
 
 [[colors.indexed_colors]]
-color = "0xdb4b4b"
 index = 17
+color = "#F5E0DC"
 
-
+# challenger-deep-theme
+#[colors.primary]
+#background = '0x1b182c'
+#foreground = '0xcbe3e7'
+#
+## Normal colors
+#[colors.normal]
+#black=   '0x100e23'
+#red=     '0xff8080'
+#green=   '0x95ffa4'
+#yellow=  '0xffe9aa'
+#blue=    '0x91ddff'
+#magenta= '0xc991e1'
+#cyan=    '0xaaffe4'
+#white=   '0xcbe3e7'
+#
+#  # Bright colors
+#[colors.bright]
+#black=   '0x565575'
+#red=     '0xff5458'
+#green=   '0x62d196'
+#yellow=  '0xffb378'
+#blue=    '0x65b2ff'
+#magenta= '0x906cff'
+#cyan=    '0x63f2f1'
+#white=   '0xa6b3cc'

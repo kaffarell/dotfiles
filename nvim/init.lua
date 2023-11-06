@@ -178,7 +178,7 @@ vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 require("catppuccin").setup({
-    flavour = "macchiato",
+    flavour = "mocha",
     term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
 })
 
