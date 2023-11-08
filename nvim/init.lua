@@ -35,7 +35,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 require("lazy").setup({
     "folke/which-key.nvim",
     { "folke/neoconf.nvim", cmd = "Neoconf" },
-    "folke/neodev.nvim",
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -49,12 +48,6 @@ require("lazy").setup({
                 indent = { enable = false },  
             })
         end
-    },
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
     },
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     {
@@ -79,7 +72,7 @@ require("lazy").setup({
     'ThePrimeagen/harpoon',
     'nvim-treesitter/nvim-treesitter-context',
     'tpope/vim-fugitive',
-    'tanvirtin/vgit.nvim',
+    'lewis6991/gitsigns.nvim',
     'RRethy/vim-illuminate',
     'mbbill/undotree',
     'nvim-tree/nvim-web-devicons',
@@ -94,6 +87,15 @@ require("lazy").setup({
         signs = true,
       }
     },
+    'nvim-pack/nvim-spectre',
+    {
+      "j-hui/fidget.nvim",
+      tag = "legacy",
+      event = "LspAttach",
+      opts = {
+        -- options
+      },
+    }
 })
 
 local lsp = require('lsp-zero').preset({})
@@ -208,7 +210,19 @@ vim.o.updatetime = 900
 vim.o.incsearch = false
 vim.wo.signcolumn = 'yes'
 
-require('vgit').setup()
+require('gitsigns').setup {
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  watch_gitdir = {
+    follow_files = true
+  },
+  attach_to_untracked = true,
+  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+}
+
 
 vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
   {silent = true, noremap = true}
@@ -219,6 +233,11 @@ vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
 vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>",
   {silent = true, noremap = true}
 )
+
+vim.keymap.set('n', '<leader>s', '<cmd>lua require("spectre").toggle()<CR>', {
+    desc = "Toggle Spectre"
+})
+
 
 -- other random remaps
 vim.g.mapleader = " "
@@ -255,8 +274,6 @@ vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set("n", "<leader>gb", ":G blame<CR>");
 
