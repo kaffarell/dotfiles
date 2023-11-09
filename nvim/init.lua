@@ -42,7 +42,7 @@ require("lazy").setup({
             local configs = require("nvim-treesitter.configs")
 
             configs.setup({
-                ensure_installed = { "perl", "c", "lua", "javascript", "rust", "javascript", "html" },
+                ensure_installed = { "rust", "javascript", "html", "perl", "c", "lua", "javascript" },
                 sync_install = false,
                 highlight = { enable = true },
                 indent = { enable = false },  
@@ -221,6 +221,39 @@ require('gitsigns').setup {
   attach_to_untracked = true,
   current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
   current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  on_attach = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    -- Actions
+    map('n', '<leader>hd', function() 
+        gs.change_base('HEAD') 
+        gs.toggle_linehl(false) 
+    end)
+    map('n', '<leader>hr', function() 
+        gs.change_base('origin/master') 
+        gs.toggle_linehl(true) 
+    end)
+  end
+
 }
 
 
