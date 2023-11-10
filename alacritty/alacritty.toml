@@ -13,20 +13,20 @@ unfocused_hollow = true
 size = 12.0
 
 [font.bold]
-family = "Liga SF Mono Nerd Font"
-style = "Medium"
+family = "BerkeleyMono Nerd Font Mono"
+style = "Bold"
 
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.italic]
-family = "Liga SF Mono Nerd Font"
-style = "Light Italic"
+family = "BerkeleyMono Nerd Font Mono"
+style = "Italic"
 
 [font.normal]
-family = "Liga SF Mono Nerd Font"
-style = "Light"
+family = "BerkeleyMono Nerd Font Mono"
+style = "Regular"
 
 [font.offset]
 x = 0
