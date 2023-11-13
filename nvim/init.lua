@@ -24,6 +24,7 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 vim.opt.termguicolors = true
 
+-- craziest remap ever
 vim.keymap.set("v", "p", "pgvy")
 
 -- Make sure to set `mapleader` before lazy so your mappings are correct
@@ -67,8 +68,9 @@ require("lazy").setup({
     },
     {
         'nvim-telescope/telescope.nvim', branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim' }
+        dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-file-browser.nvim' }
     },
+    'nvim-telescope/telescope-project.nvim',
     'ThePrimeagen/harpoon',
     'nvim-treesitter/nvim-treesitter-context',
     'tpope/vim-fugitive',
@@ -173,11 +175,15 @@ vim.diagnostic.config({
     virtual_text = true
 })
 
+require('telescope').load_extension('project')
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fp', "<cmd>:Telescope project<cr>", 
+  {silent = true, noremap = true}
+)
 
 require("catppuccin").setup({
     flavour = "mocha",
@@ -291,7 +297,7 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- greatest remap ever
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
--- copy to cleapboard
+-- copy to clipboard
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
