@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-selected=`cat ./cht-languages ./cht-commands | fzf`
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+selected=`cat $SCRIPT_DIR/cht-languages $SCRIPT_DIR/cht-commands | fzf`
 if [[ -z $selected ]]; then
     exit 0
 fi
