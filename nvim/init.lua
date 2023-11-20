@@ -97,7 +97,8 @@ require("lazy").setup({
       opts = {
         -- options
       },
-    }
+    },
+    'rmagatti/auto-session',
 })
 
 local lsp = require('lsp-zero').preset({})
@@ -175,6 +176,7 @@ vim.diagnostic.config({
 })
 
 require('telescope').load_extension('project')
+require('telescope').load_extension('file_browser')
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
@@ -184,6 +186,12 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fp', "<cmd>:Telescope project<cr>", 
   {silent = true, noremap = true}
 )
+
+require("auto-session").setup {
+    log_level = "error",
+    auto_session_suppress_dirs = { "~/Downloads"},
+}
+
 
 require("catppuccin").setup({
     flavour = "mocha",
@@ -308,4 +316,3 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>gb", ":G blame<CR>");
-
