@@ -8,7 +8,7 @@ fi
 
 read -p "Enter Query: " query
 
-if grep -qs "$selected" ./cht-languages; then
+if grep -qs "$selected" $SCRIPT_DIR/cht-languages; then
     curl -s cht.sh/$selected/$query | less
 else
     curl -s cht.sh/$selected~$query | less
