@@ -23,8 +23,10 @@ vim.opt.backup = false
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 vim.opt.termguicolors = true
+vim.opt.cursorline = true
 
 -- craziest remap ever
+-- when pasting over a selection, keep the clipboard content
 vim.keymap.set("v", "p", "pgvy")
 
 -- Make sure to set `mapleader` before lazy so your mappings are correct
@@ -112,11 +114,9 @@ lsp.ensure_installed({
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
-
 require('trouble').setup {
     icons = true,
 }
-
 
 -- to make PLS work
 require'lspconfig'.perlpls.setup{}
@@ -149,8 +149,6 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, opts)
     -- show all errors in popup
     vim.keymap.set("n", "ge", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     -- show code actions
     vim.keymap.set("n", "gc", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
@@ -221,7 +219,6 @@ vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 
 vim.o.updatetime = 900
-vim.o.incsearch = false
 vim.wo.signcolumn = 'yes'
 
 require('gitsigns').setup {
@@ -258,10 +255,12 @@ require('gitsigns').setup {
     end, {expr=true})
 
     -- Actions
+    -- set the git base back to HEAD
     map('n', '<leader>hd', function() 
         gs.change_base('HEAD') 
         gs.toggle_linehl(false) 
     end)
+    -- quickly review the latest applied patches
     map('n', '<leader>hr', function() 
         gs.change_base('origin/master') 
         gs.toggle_linehl(true) 
