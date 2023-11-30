@@ -185,8 +185,12 @@ wk.register({
     g = { "<cmd>:Telescope live_grep<cr>", "Live Grep"},
     s = { "<cmd>:Telescope lsp_document_symbols<cr>", "Document symbols"},
     h = { "<cmd>:Telescope help_tags<cr>", "Help Tags"},
-    b = { "<cmd>:Telescope buffers<cr>", "Buffers"},
+    l = { "<cmd>:Telescope buffers<cr>", "Last files"},
+    b = { "<cmd>:Telescope file_browser<cr>", "Browse"},
     p = { "<cmd>:Telescope project<cr>", "Project"},
+  },
+  ["<leader>x"] = {
+    name = "+Trouble", -- optional group name
   },
 })
 
