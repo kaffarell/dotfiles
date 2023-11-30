@@ -175,15 +175,20 @@ vim.diagnostic.config({
 
 require('telescope').load_extension('project')
 require('telescope').load_extension('file_browser')
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fp', "<cmd>:Telescope project<cr>", 
-  {silent = true, noremap = true}
-)
+
+local wk = require("which-key")
+
+wk.register({
+  ["<leader>f"] = {
+    name = "+file", -- optional group name
+    f = { "<cmd>:Telescope find_files<cr>", "Find File"},
+    g = { "<cmd>:Telescope live_grep<cr>", "Live Grep"},
+    s = { "<cmd>:Telescope lsp_document_symbols<cr>", "Document symbols"},
+    h = { "<cmd>:Telescope help_tags<cr>", "Help Tags"},
+    b = { "<cmd>:Telescope buffers<cr>", "Buffers"},
+    p = { "<cmd>:Telescope project<cr>", "Project"},
+  },
+})
 
 require("auto-session").setup {
     log_level = "error",
@@ -307,7 +312,6 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
