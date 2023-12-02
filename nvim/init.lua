@@ -33,7 +33,7 @@ vim.keymap.set("v", "p", "pgvy")
 vim.g.mapleader = " "
 
 -- add Control-C as a shortcut to get to the normal mode (alternative to caps-lock)
-vim.keymap.set("i", "<C-c>", "<Esc>")
+-- vim.keymap.set("i", "<C-c>", "<Esc>")
 
 require("lazy").setup({
     "folke/which-key.nvim",
@@ -65,7 +65,15 @@ require("lazy").setup({
             -- Autocompletion
             {'hrsh7th/nvim-cmp'},     -- Required
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
-            {'L3MON4D3/LuaSnip'},     -- Required
+
+            {'hrsh7th/cmp-buffer'},
+            {'hrsh7th/cmp-path'},
+            {'saadparwaiz1/cmp_luasnip'},
+            {'hrsh7th/cmp-nvim-lua'},
+  
+            -- Snippets
+            {'L3MON4D3/LuaSnip'},
+            {'rafamadriz/friendly-snippets'},
         }
     },
     {
