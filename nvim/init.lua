@@ -81,6 +81,7 @@ require("lazy").setup({
         dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-file-browser.nvim' }
     },
     'nvim-telescope/telescope-project.nvim',
+    'ThePrimeagen/git-worktree.nvim',
     'ThePrimeagen/harpoon',
     'nvim-treesitter/nvim-treesitter-context',
     'tpope/vim-fugitive',
@@ -127,7 +128,8 @@ require("lazy").setup({
           { "<c-s>", mode = { "c" }, 
             function() require("flash").toggle() end, desc = "Toggle Flash Search" },
       },
-}
+    },
+    'nvim-lualine/lualine.nvim'
 })
 
 local lsp = require('lsp-zero').preset({})
@@ -201,6 +203,7 @@ vim.diagnostic.config({
 })
 
 require('telescope').load_extension('project')
+require('telescope').load_extension('git_worktree')
 require('telescope').load_extension('file_browser')
 
 local wk = require("which-key")
@@ -215,6 +218,7 @@ wk.register({
     l = { "<cmd>:Telescope buffers<cr>", "Last files"},
     b = { "<cmd>:Telescope file_browser<cr>", "Browse"},
     p = { "<cmd>:Telescope project<cr>", "Project"},
+    w = { "<cmd>:Telescope git_worktree<cr>", "Git Worktree"},
   },
   ["<leader>x"] = {
     name = "+Trouble", -- optional group name
@@ -224,6 +228,20 @@ wk.register({
 require("auto-session").setup {
     log_level = "error",
     auto_session_suppress_dirs = { "~/Downloads"},
+}
+
+require("lualine").setup {
+    sections = {
+        lualine_c = {
+            {
+                "filename",
+                path = 1,
+                file_status = true,
+                newfile_status = true,
+            },
+        },
+        lualine_x = {},
+    }
 }
 
 
