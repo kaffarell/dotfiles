@@ -70,7 +70,7 @@ require("lazy").setup({
             {'hrsh7th/cmp-path'},
             {'saadparwaiz1/cmp_luasnip'},
             {'hrsh7th/cmp-nvim-lua'},
-  
+
             -- Snippets
             {'L3MON4D3/LuaSnip'},
             {'rafamadriz/friendly-snippets'},
@@ -78,7 +78,19 @@ require("lazy").setup({
     },
     {
         'nvim-telescope/telescope.nvim', branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-file-browser.nvim' }
+        dependencies = { 
+            'nvim-lua/plenary.nvim', 
+            'nvim-telescope/telescope-file-browser.nvim',
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                -- NOTE: If you are having trouble with this installation,
+                --       refer to the README for telescope-fzf-native for more instructions.
+                build = 'make',
+                cond = function()
+                    return vim.fn.executable 'make' == 1
+                end,
+            },
+        }
     },
     'nvim-telescope/telescope-project.nvim',
     'ThePrimeagen/git-worktree.nvim',
@@ -91,45 +103,42 @@ require("lazy").setup({
     'nvim-tree/nvim-web-devicons',
     'folke/trouble.nvim',
     {
-      "folke/todo-comments.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
-      opts = {
-        -- your confiuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-        signs = true,
-      }
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {
+            -- your confiuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            signs = true,
+        }
     },
     'nvim-pack/nvim-spectre',
     {
-      "j-hui/fidget.nvim",
-      tag = "legacy",
-      event = "LspAttach",
-      opts = {
-        -- options
-      },
+        "j-hui/fidget.nvim",
+        tag = "legacy",
+        event = "LspAttach",
+        opts = {
+            -- options
+        },
     },
     'rmagatti/auto-session',
     {
-      "folke/flash.nvim",
-      event = "VeryLazy",
-      ---@type Flash.Config
-      opts = {},
-      -- stylua: ignore
-      keys = {
-          { "s", mode = { "n", "o" }, 
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        ---@type Flash.Config
+        opts = {},
+        -- stylua: ignore
+        keys = {
+            { "s", mode = { "n", "o" }, 
             function() require("flash").jump() end, desc = "Flash" },
-          { "S", mode = { "n", "", "o" }, 
+            { "S", mode = { "n", "", "o" }, 
             function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-          { "r", mode = "o", 
-            function() require("flash").remote() end, desc = "Remote Flash" },
-          { "R", mode = { "o", "x" }, 
+            { "R", mode = { "o", "x" }, 
             function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-          { "<c-s>", mode = { "c" }, 
-            function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-      },
+        },
     },
-    'nvim-lualine/lualine.nvim'
+    'nvim-lualine/lualine.nvim',
+    'tpope/vim-sleuth',
 })
 
 local lsp = require('lsp-zero').preset({})
@@ -186,13 +195,13 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.format_on_save({
-  format_opts = {
-    async = false,
-    timeout_ms = 10000,
-  },
-  servers = {
-    ['rust_analyzer'] = {'rust'},
-  }
+    format_opts = {
+        async = false,
+        timeout_ms = 10000,
+    },
+    servers = {
+        ['rust_analyzer'] = {'rust'},
+    }
 })
 
 
@@ -209,20 +218,20 @@ require('telescope').load_extension('file_browser')
 local wk = require("which-key")
 
 wk.register({
-  ["<leader>f"] = {
-    name = "+file", -- optional group name
-    f = { "<cmd>:Telescope find_files<cr>", "Find File"},
-    g = { "<cmd>:Telescope live_grep<cr>", "Live Grep"},
-    s = { "<cmd>:Telescope lsp_document_symbols<cr>", "Document symbols"},
-    h = { "<cmd>:Telescope help_tags<cr>", "Help Tags"},
-    l = { "<cmd>:Telescope buffers<cr>", "Last files"},
-    b = { "<cmd>:Telescope file_browser<cr>", "Browse"},
-    p = { "<cmd>:Telescope project<cr>", "Project"},
-    w = { "<cmd>:Telescope git_worktree<cr>", "Git Worktree"},
-  },
-  ["<leader>x"] = {
-    name = "+Trouble", -- optional group name
-  },
+    ["<leader>f"] = {
+        name = "+file", -- optional group name
+        f = { "<cmd>:Telescope find_files<cr>", "Find File"},
+        g = { "<cmd>:Telescope live_grep<cr>", "Live Grep"},
+        s = { "<cmd>:Telescope lsp_document_symbols<cr>", "Document symbols"},
+        h = { "<cmd>:Telescope help_tags<cr>", "Help Tags"},
+        l = { "<cmd>:Telescope buffers<cr>", "Last files"},
+        b = { "<cmd>:Telescope file_browser<cr>", "Browse"},
+        p = { "<cmd>:Telescope project<cr>", "Project"},
+        w = { "<cmd>:Telescope git_worktree<cr>", "Git Worktree"},
+    },
+    ["<leader>x"] = {
+        name = "+Trouble", -- optional group name
+    },
 })
 
 require("auto-session").setup {
@@ -273,63 +282,57 @@ vim.o.updatetime = 900
 vim.wo.signcolumn = 'yes'
 
 require('gitsigns').setup {
-  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
-  watch_gitdir = {
-    follow_files = true
-  },
-  attach_to_untracked = true,
-  current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-  on_attach = function(bufnr)
-    local gs = package.loaded.gitsigns
+    signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+    numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+    linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+    word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+    watch_gitdir = {
+        follow_files = true
+    },
+    attach_to_untracked = true,
+    current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+    on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
 
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
+        local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+        end
+
+        -- Navigation
+        map('n', ']c', function()
+            if vim.wo.diff then return ']c' end
+            vim.schedule(function() gs.next_hunk() end)
+            return '<Ignore>'
+        end, {expr=true})
+
+        map('n', '[c', function()
+            if vim.wo.diff then return '[c' end
+            vim.schedule(function() gs.prev_hunk() end)
+            return '<Ignore>'
+        end, {expr=true})
+
+        -- Actions
+        -- set the git base back to HEAD
+        map('n', '<leader>hd', function() 
+            gs.change_base('HEAD') 
+            gs.toggle_linehl(false) 
+        end)
+        -- quickly review the latest applied patches
+        map('n', '<leader>hr', function() 
+            gs.change_base('origin/master') 
+            gs.toggle_linehl(true) 
+        end)
     end
-
-    -- Navigation
-    map('n', ']c', function()
-      if vim.wo.diff then return ']c' end
-      vim.schedule(function() gs.next_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    map('n', '[c', function()
-      if vim.wo.diff then return '[c' end
-      vim.schedule(function() gs.prev_hunk() end)
-      return '<Ignore>'
-    end, {expr=true})
-
-    -- Actions
-    -- set the git base back to HEAD
-    map('n', '<leader>hd', function() 
-        gs.change_base('HEAD') 
-        gs.toggle_linehl(false) 
-    end)
-    -- quickly review the latest applied patches
-    map('n', '<leader>hr', function() 
-        gs.change_base('origin/master') 
-        gs.toggle_linehl(true) 
-    end)
-  end
 
 }
 
 
-vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
-  {silent = true, noremap = true}
-)
-vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>",
-  {silent = true, noremap = true}
-)
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", {silent = true, noremap = true})
+vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>", {silent = true, noremap = true})
 
 vim.keymap.set('n', '<leader>s', '<cmd>lua require("spectre").toggle()<CR>', {
     desc = "Toggle Spectre"
