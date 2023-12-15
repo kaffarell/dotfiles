@@ -35,12 +35,15 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # set english keyboard layout
-exec setxkbmap -layout us
+exec --no-startup-id setxkbmap -layout us
+exec --no-startup-id setxkbmap -option compose:ralt
+exec --no-startup-id setxkbmap -option caps:escape
 # set wallpaper
 exec feh --bg-fill ~/Downloads/IMG_4537.jpg
 
 # start dunst (notifcation manager)
 exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
+
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
